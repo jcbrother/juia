@@ -10,8 +10,7 @@ apply plugin: 'maven'
 sourceCompatibility = 1.6
 
 repositories {
-    maven { url 'http://maven.lujs.cn/nexus/content/groups/public/' }
-    maven { url "http://172.19.80.11/nexus/repository/maven-public/"}
+//  maven { url "http://172.19.80.11/nexus/repository/maven-public/"}
     mavenCentral()
 }
 
