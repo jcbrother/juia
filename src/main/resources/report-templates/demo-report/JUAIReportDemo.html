@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JUAI Report</title>
+	<link rel="stylesheet" href="../../report-css/JUAIReport.css">
+	<script type="text/JavaScript" src="../../report-js/JUAIReport.js"></script>
+	<script src="../../report-js/pie.js"></script>
+	<script src="../../report-js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div id="report">
+
+	<div id="report-header">
+		<div id="header-info">
+			<p id="report-title">移动端JUIA测试报告</p>
+			<ul id="report-info">
+				<li>APP版本：$!{appVersion}</li>
+				<li>系统版本：$!{osVersion}</li>
+				<li>测试执行：$!{tester}</li>
+				<li>测试用例集：$!{suiteName}</li>
+				<li>测试环境：$!{testEnv}</li>
+				<li>执行时间：$!{reportTime}</li>
+			</ul>
+		</div>
+		<div id="my_container">
+			<canvas id="pie_canvas"></canvas>
+		</div>
+		<img id="report-logo" src="../../report-src/report-logo.png" alt="LOGO加载失败">
+		<div class="clear"></div>
+	</div>
+
+	<div class="clear"></div>
+
+	<div id="report-area">
+		<div id="report-cases">
+			<p id="suite-title">测试用例</p>
+			<ul id="case-titles">
+				<li id="case1" onclick="showCaseDetails(this)">[case1]从理财频道搜索基金</li>
+				<li id="case2" onclick="showCaseDetails(this)">[case2]登录用户进入主账户</li>
+			</ul>
+		</div>
+
+		<div id="case1-details" class="case-details">
+			<p id="details-title">用例详情</p>
+			<p id="case-title">标题</p>
+			<p id="detail-title">[case1]从理财频道搜索基金</p>
+			<p id="step-title">步骤</p>
+			<ul id="step-details">
+				<li>STEP1: </li>
+				<li>STEP2: </li>
+				<li>STEP3: </li>
+			</ul>
+			<p id="result-title">结果</p>
+			<ul id="test-results">
+				<li>STEP1>> Expect:  <span class="expect-result">登录按钮消失</span>   Actual:  <span class="actual-result-fail">FAIL</span></li>
+				<li>STEP2>> Expect:  <span class="expect-result">登录按钮消失</span>   Actual:  <span class="actual-result-fail">FAIL</span></li>
+				<li>STEP3>> Expect:  <span class="expect-result">登录按钮消失</span>   Actual:  <span class="actual-result-fail">FAIL</span></li>
+			</ul>
+			<p id="snapshoot-title">截图</p>
+			<div id="snapshoot-display">
+				<p id="pic-name">../../report-src/demo-snapshoots/1.jpg</p>
+				<img id="left-icon" src="../../report-src/left-icon.png" alt="" onclick="showPreviousSnapshoot(this)"/>
+				<img id="snapshoot-playing" src="../../report-src/demo-snapshoots/1.jpg" alt=""/>
+				<img id="right-icon" src="../../report-src/right-icon.png" alt="" onclick="showNextSnapshoot(this)"/>
+				<p id="pic-idx">1/3</p>
+			</div>
+			<ul id="snapshoot-list">
+				<li id="STEP1" class="snapshoot-data">../../report-src/demo-snapshoots/1.jpg</li>
+				<li id="STEP2" class="snapshoot-data">../../report-src/demo-snapshoots/2.jpg</li>
+				<li id="STEP3" class="snapshoot-data">../../report-src/demo-snapshoots/3.jpg</li>
+			</ul>
+		</div>
+
+		<div id="case2-details" class="case-details">
+			<p id="details-title">用例详情</p>
+			<p id="case-title">标题</p>
+			<p id="detail-title">[case2]登录用户进入主账户</p>
+			<p id="step-title">步骤</p>
+			<ul id="step-details">
+				<li>STEP1: </li>
+				<li>STEP2: </li>
+				<li>STEP3: </li>
+			</ul>
+			<p id="result-title">结果</p>
+			<ul id="test-results">
+				<li>STEP1>> Expect:  <span class="expect-result">登录按钮消失</span>   Actual:  <span class="actual-result-fail">FAIL</span></li>
+				<li>STEP2>> Expect:  <span class="expect-result">登录按钮消失</span>   Actual:  <span class="actual-result-fail">FAIL</span></li></li>
+				<li>STEP3>> Expect:  <span class="expect-result">登录按钮消失</span>   Actual:  <span class="actual-result-fail">FAIL</span></li></li>
+			</ul>
+			<p id="snapshoot-title">截图</p>
+			<div id="snapshoot-display">
+				<p id="pic-name">../../report-src/demo-snapshoots/1.jpg</p>
+				<img id="left-icon" src="../../report-src/left-icon.png" alt="" onclick="showPreviousSnapshoot(this)">
+				<img id="snapshoot-playing" src="../../report-src/demo-snapshoots/1.jpg" alt="">
+				<img id="right-icon" src="../../report-src/right-icon.png" alt="" onclick="showNextSnapshoot(this)">
+				<p id="pic-idx">1/3</p>
+			</div>
+			<ul id="snapshoot-list">
+				<li id="STEP1" class="snapshoot-data">../../report-src/demo-snapshoots/1.jpg</li>
+				<li id="STEP2" class="snapshoot-data">../../report-src/demo-snapshoots/2.jpg</li>
+				<li id="STEP3" class="snapshoot-data">../../report-src/demo-snapshoots/3.jpg</li>
+			</ul>
+		</div>
+
+		<div class="clear"></div>
+
+	</div>
+</div>
+
+<script>
+	drawPieChart(1,1,1,"pie_canvas");
+	var caseId = "case1";
+	var divId = "#" + caseId + "-details";
+	$(divId).css("display","inline");
+	$("#" + caseId).css("color","blue");
+</script>
+</body>
+</html>

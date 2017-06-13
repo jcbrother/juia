@@ -1,0 +1,61 @@
+group 'com.lufax.mobile'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+
+sourceCompatibility = 1.6
+
+repositories {
+    maven { url 'http://maven.lujs.cn/nexus/content/groups/public/' }
+    maven { url "http://172.19.80.11/nexus/repository/maven-public/"}
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        resources.srcDirs += 'src/main/resources'
+    }
+    test {
+        resources.srcDirs += 'src/test/resources'
+    }
+}
+
+
+dependencies {
+
+    def spring_version = "4.3.1.RELEASE"
+    compile("org.springframework:spring-core:$spring_version")
+    compile("org.springframework:spring-expression:$spring_version")
+    compile("org.springframework:spring-beans:$spring_version")
+    compile("org.springframework:spring-aop:$spring_version")
+    compile("org.springframework:spring-context:$spring_version")
+    compile("org.springframework:spring-tx:$spring_version")
+    compile("org.springframework:spring-orm:$spring_version")
+    compile("org.springframework:spring-web:$spring_version")
+    compile("org.springframework:spring-asm:$spring_version")
+    compile("org.springframework:spring-jdbc:$spring_version")
+    compile("org.springframework:spring-webmvc:$spring_version")
+    compile("org.springframework:spring-test:$spring_version")
+    compile("aopalliance:aopalliance:1.0")
+
+    compile("org.javassist:javassist:3.20.0-GA")
+//    compile("org.seleniumhq.selenium:selenium-server-standalone:2.53.0")
+    compile("org.seleniumhq.selenium:selenium-java:2.45.0")
+    compile("io.appium:java-client:4.1.2")
+    compile("org.json:json:20160212")
+    compile("org.dom4j:dom4j:2.0.0")
+
+//    compile("::")
+//    compile("::")
+//    compile("::")
+//    compile("::")
+//    compile("::")
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+}

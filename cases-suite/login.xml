@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "lu-uia-suite.dtd" >
+<suite name="UserLogin" description="用户登录用例集">
+    <cases exec-before-test="false" exec-after-test="false">
+        <before-test-cases purpose="测试前准备" preserve-order="true">
+            <case id="1" title="滑动去除启动图" priority="2">
+                <step id="1" src-page-name="启动图页面1" method="shortTapById" dest-page-name="启动图页面3" snapshoot="true" step-desc="滑动启动图至最后一页" expect-result="">
+                    <assert-key value="立即体验按钮" location-type="id" compare-type="equal" compare-value="sqlMapId:*/jetjiang" />
+                </step>
+                <step id="2" src-page-name="启动图页面3" method="shortTapById" dest-page-name="陆金所APP首页" snapshoot="true" step-desc="进陆金所APP首页" expect-result="">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android://tsx1" />
+                    <assert-key value="com.lufax.android://tsv1" location-type="id" compare-type="equal" compare-value="sqlMapId:*/jetjiang1" />
+                </step>
+            </case>
+        </before-test-cases>
+
+        <test-cases purpose="测试用户登录" preserve-order="true">
+            <case id="1" title="登录mobguang账户" priority="1">
+                <step id="1" src-page-name="MainPage" method="shortTapById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="点击我的，跳转至用户登录页面"  expect-result="正常进入用户登录页面">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/layout_bottombar4" />
+                    <assert-key value="com.lufax.android:id/btn_login" location-type="id"  compare-type="equal" compare-value="登录"/>
+                </step>
+                <step id="2" src-page-name="UserLoginPage" method="sendKeysById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="输入用户名" expect-result="正常输入用户名">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_loginname" />
+                    <method-param name="keyStr" type="input-string" value="chenjie002\n"/>
+                    <assert-key value="com.lufax.android:id/et_loginname" location-type="id"  compare-type="equal" compare-value="mobguang"/>
+                </step>
+                <step id="3" src-page-name="UserLoginPage" method="sendKeysById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="输入密码" expect-result="正常输入登录密码">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_loginpswd" />
+                    <method-param name="keyStr" type="input-string" value="mima123\n"/>
+                    <assert-key value="com.lufax.android:id/btn_login" location-type="id"  compare-type="equal" compare-value="登录"/>
+                </step>
+                <step id="4" src-page-name="UserLoginPage" method="shortTapById" dest-page-name="MyAccountPage" snapshoot="true" step-desc="点击登录"  expect-result="正常登录我的账户">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/btn_login" />
+                    <assert-key value="com.lufax.android:id/withdraw_tv" location-type="id"  compare-type="equal" compare-value="取现"/>
+                </step>
+            </case>
+        </test-cases>
+
+        <after-test-cases purpose="测试后清理" preserve-order="true">
+            <case id="1" title="关闭appium driver" priority="2">
+                <step id="1" src-page-name="基金搜索结果页" method="shortTapById" dest-page-name="手机桌面" snapshoot="true" step-desc="关闭appium driver" expect-result="">
+                    <assert-key value="com.lufax.android://tsv5" location-type="id" compare-type="equal" compare-value="桌面" />
+                </step>
+            </case>
+        </after-test-cases>
+    </cases>
+</suite>

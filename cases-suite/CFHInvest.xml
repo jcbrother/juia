@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "lu-uia-suite.dtd" >
+<suite name="CFHInvestment" description="用户登录、财富汇单品页查看、投资用例集">
+    <cases exec-before-test="false" exec-after-test="false">
+        <before-test-cases purpose="测试前准备" preserve-order="true">
+            <case id="1" title="滑动去除启动图" priority="2">
+                <step id="1" src-page-name="启动图页面1" method="shortTapById" dest-page-name="启动图页面3" snapshoot="true" step-desc="滑动启动图至最后一页" expect-result="">
+                    <assert-key value="立即体验按钮" location-type="id" compare-type="equal" compare-value="sqlMapId:*/jetjiang" />
+                </step>
+                <step id="2" src-page-name="启动图页面3" method="shortTapById" dest-page-name="陆金所APP首页" snapshoot="true" step-desc="进陆金所APP首页" expect-result="">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android://tsx1" />
+                    <assert-key value="com.lufax.android://tsv1" location-type="id" compare-type="equal" compare-value="sqlMapId:*/jetjiang1" />
+                </step>
+            </case>
+        </before-test-cases>
+
+        <test-cases purpose="测试用户登录、财富汇单品页查看、投资用例" preserve-order="true">
+            <case id="1" title="登录mobguang账户" priority="1">
+                <step id="1" src-page-name="MainPage" method="shortTapById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="点击我的，跳转至用户登录页面"  expect-result="正常进入用户登录页面">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/layout_bottombar4" />
+                    <assert-key value="com.lufax.android:id/btn_login" location-type="id"  compare-type="equal" compare-value="登录"/>
+                </step>
+                <step id="2" src-page-name="UserLoginPage" method="sendKeysById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="输入用户名" expect-result="正常输入用户名">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_loginname" />
+                    <method-param name="keyStr" type="input-string" value="mobguang\n"/>
+                    <assert-key value="com.lufax.android:id/et_loginname" location-type="id"  compare-type="equal" compare-value="mobguang"/>
+                </step>
+                <step id="3" src-page-name="UserLoginPage" method="sendKeysById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="输入密码" expect-result="正常输入登录密码">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_loginpswd" />
+                    <method-param name="keyStr" type="input-string" value="Play99\n"/>
+                    <assert-key value="com.lufax.android:id/btn_login" location-type="id"  compare-type="equal" compare-value="登录"/>
+                </step>
+                <step id="4" src-page-name="UserLoginPage" method="shortTapById" dest-page-name="MyAccountPage" snapshoot="true" step-desc="点击登录"  expect-result="正常登录我的账户">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/btn_login" />
+                    <assert-key value="com.lufax.android:id/withdraw_tv" location-type="id"  compare-type="equal" compare-value="取现"/>
+                </step>
+            </case>
+
+
+            <case id="2" title="查看财富汇单品页" priority="1">
+                <step id="1" src-page-name="MyAccountPage" method="shortTapById" dest-page-name="FinanceListPage" snapshoot="true" step-desc="点击理财，进投资理财大列表页"  expect-result="正常查看理财大列表页">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/layout_bottombar2" />
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="理财"/>
+                </step>
+                <step id="2" src-page-name="FinanceListPage" method="shortTapByXpath" dest-page-name="DingQiList" snapshoot="true" step-desc="点击定期，进定期频道列表页" expect-result="正常进入定期频道列表页">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[2]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ListView[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="财富汇、彩虹"/>
+                </step>
+                <step id="3" src-page-name="DingQiList" method="shortTapByXpath" dest-page-name="CFHCHListPage" snapshoot="true" step-desc="进入财富汇、彩虹三级列表页面" expect-result="正常进入财富汇、彩虹三级列表页面">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ListView[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="筛选"/>
+                </step>
+                <step id="4" src-page-name="CFHCHListPage" method="shortTapByXpath" dest-page-name="CFHCHListPage" snapshoot="true" step-desc="点击筛选" expect-result="正常弹出筛选菜单">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.TextView[1]"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.GridView[1]/android.view.ViewGroup[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="财富汇"/>
+                </step>
+                <step id="5" src-page-name="CFHCHListPage" method="shortTapByXpath" dest-page-name="CFHCHListPage" snapshoot="true" step-desc="点击财富汇筛选项" expect-result="正常选中财富汇筛选项">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.GridView[1]/android.view.ViewGroup[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.GridView[1]/android.view.ViewGroup[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="财富汇"/>
+                </step>
+                <step id="6" src-page-name="CFHCHListPage" method="shortTapById" dest-page-name="CFHCHListPage" snapshoot="true" step-desc="点击确定，进行筛选" expect-result="正常筛选出财富汇列表">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/bt_filter_confirm"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[2]/android.widget.LinearLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="财富汇、彩虹"/>
+                </step>
+                <step id="7" src-page-name="CFHCHListPage" method="shortTapByXpath" dest-page-name="CFHCHListPage" snapshoot="true" step-desc="点击起投金额，进行筛选" expect-result="正常弹出起投金额筛选项">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.TextView[1]"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.view.ViewGroup[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="5万元以下"/>
+                </step>
+                <step id="8" src-page-name="CFHCHListPage" method="shortTapByXpath" dest-page-name="CFHCHListPage" snapshoot="true" step-desc="点击起投金额5万元以下筛选项" expect-result="正常筛选出起投金额5万元以下财富汇产品列表">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.view.ViewGroup[2]/android.widget.LinearLayout[1]"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[2]/android.widget.LinearLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="财富汇、彩虹"/>
+                </step>
+                <step id="9" src-page-name="CFHCHListPage" method="shortTapByXpath" dest-page-name="CFHProductDetailPage" snapshoot="true" step-desc="点击产品，进单品页" expect-result="正常进入财富汇单品页">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ListView[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]"/>
+                    <assert-key value="com.lufax.android:id/etPrice" location-type="id"  compare-type="equal" compare-value="投资金额"/>
+                </step>
+            </case>
+
+
+            <case id="3" title="投资财富汇" priority="1">
+                <step id="1" src-page-name="CFHProductDetailPage" method="shortTapById" dest-page-name="CFHProductDetailPage" snapshoot="true" step-desc="财富汇单品页点击金额输入框"  expect-result="弹起金额输入框">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/etPrice" />
+                    <assert-key value="com.lufax.android:id/input_etPrice" location-type="id"  compare-type="equal" compare-value=""/>
+                </step>
+                <step id="2" src-page-name="CFHProductDetailPage" method="sendKeysById" dest-page-name="CFHProductDetailPage" snapshoot="true" step-desc="输入投资金额" expect-result="正常输入投资金额">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/input_etPrice" />
+                    <method-param name="keyStr" type="input-string" value="50000"/>
+                    <assert-key value="com.lufax.android:id/input_btnAction" location-type="id"  compare-type="equal" compare-value="立即投资"/>
+                </step>
+                <step id="3" src-page-name="CFHProductDetailPage" method="shortTapById" dest-page-name="InvestConfirmPage" snapshoot="true" step-desc="点击立即投资" expect-result="进入确认投资页面">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/input_btnAction"/>
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ScrollView[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[3]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="实付金额"/>
+                </step>
+                <step id="4" src-page-name="InvestConfirmPage" method="shortTapById" dest-page-name="InvestConfirmPage" snapshoot="true" step-desc="勾选协议" expect-result="正常勾选协议，立即投资按钮可点击">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/chkEnable" />
+                    <assert-key value="com.lufax.android:id/btn_invest" location-type="id"  compare-type="equal" compare-value="立即投资"/>
+                </step>
+                <step id="5" src-page-name="InvestConfirmPage" method="shortTapById" dest-page-name="InvestConfirmPage" snapshoot="true" step-desc="点击立即投资" expect-result="弹出确认支付方式页面">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/btn_invest" />
+                    <assert-key value="com.lufax.android:id/btn_next" location-type="id"  compare-type="equal" compare-value="下一步"/>
+                </step>
+                <step id="6" src-page-name="InvestConfirmPage" method="shortTapById" dest-page-name="InvestConfirmPage" snapshoot="true" step-desc="点击下一步" expect-result="跳转至交易密码输入框">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/btn_next" />
+                    <assert-key value="com.lufax.android:id/btn_confirm" location-type="id" compare-type="equal" compare-value="立即支付"/>
+                </step>
+            </case>
+
+        </test-cases>
+
+        <after-test-cases purpose="测试后清理" preserve-order="true">
+            <case id="1" title="关闭appium driver" priority="2">
+                <step id="1" src-page-name="基金搜索结果页" method="shortTapById" dest-page-name="手机桌面" snapshoot="true" step-desc="关闭appium driver" expect-result="">
+                    <assert-key value="com.lufax.android://tsv5" location-type="id" compare-type="equal" compare-value="桌面" />
+                </step>
+            </case>
+        </after-test-cases>
+    </cases>
+</suite>

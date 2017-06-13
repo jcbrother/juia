@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JUAI Report</title>
+	<link rel="stylesheet" href="../../report-css/JUAIReport.css">
+	<script type="text/JavaScript" src="../../report-js/JUAIReport.js"></script>
+	<script src="../../report-js/pie.js"></script>
+	<script src="../../report-js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div id="report">
+
+	<div id="report-header">
+		<div id="header-info">
+			<p id="report-title">移动端JUIA测试报告</p>
+			<ul id="report-info">
+				<li>APP版本：$!{APP_VERSION}</li>
+				<li>系统版本：$!{OS_VERSION}</li>
+				<li>测试执行：$!{TESTER}</li>
+				<li>测试用例集：$!{SUITE_NAME}</li>
+				<li>测试环境：$!{TEST_ENV}</li>
+				<li>执行时间：$!{REPORT_TIME}</li>
+			</ul>
+		</div>
+		<div id="my_container">
+			<canvas id="pie_canvas"></canvas>
+		</div>
+		<img id="report-logo" src="../../report-src/report-logo.png" alt="LOGO加载失败">
+		<div class="clear"></div>
+	</div>
+
+	<div class="clear"></div>
+
+	<div id="report-area">
+		<div id="report-cases">
+			<p id="suite-title">测试用例</p>
+			$!{ALL_CASE_LIST}
+		</div>
+
+		$!{CASE_DETAIL_DIVS}
+
+		<div class="clear"></div>
+
+	</div>
+</div>
+
+<script>
+	drawPieChart($!{PASS_NUM},$!{FAIL_NUM},$!{NA_NUM},"pie_canvas");
+	var caseId = "$!{FIRST_CASE_ID}";
+	var divId = "#" + caseId + "-details";
+	$(divId).css("display","inline");
+	$("#" + caseId).css("background","#DDDDDD");
+</script>
+</body>
+</html>

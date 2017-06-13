@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "lu-uia-suite.dtd" >
+<suite name="JiJinSearch2" description="基金搜索测试用例集">
+    <cases exec-before-test="false" exec-after-test="false">
+        <before-test-cases purpose="测试前准备" preserve-order="true">
+            <case id="1" title="滑动去除启动图" priority="2">
+                <step id="1" src-page-name="启动图页面1" method="shortTapById" dest-page-name="启动图页面3" snapshoot="true" step-desc="滑动启动图至最后一页" expect-result="">
+                    <assert-key value="立即体验按钮" location-type="id" compare-type="equal" compare-value="sqlMapId:*/jetjiang" />
+                </step>
+                <step id="2" src-page-name="启动图页面3" method="shortTapById" dest-page-name="陆金所APP首页" snapshoot="true" step-desc="进陆金所APP首页" expect-result="">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android://tsx1" />
+                    <assert-key value="com.lufax.android://tsv1" location-type="id" compare-type="equal" compare-value="sqlMapId:*/jetjiang1" />
+                </step>
+            </case>
+        </before-test-cases>
+
+        <test-cases purpose="测试基金搜索功能" preserve-order="true">
+            <case id="1" title="搜索基金" priority="1">
+                <step id="1" src-page-name="MainPage" method="shortTapById" dest-page-name="FinanceListPage" snapshoot="true" step-desc="点击投资理财，进投资理财列表页"  expect-result="正常进入投资理财大列表页">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/layout_bottombar2" />
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="理财"/>
+                </step>
+                <step id="2" src-page-name="FinanceListPage" method="shortTapByXpath" dest-page-name="JiJinInFinancePage" snapshoot="true" step-desc="点击基金，进投资理财基金列表页" expect-result="进入理财基金列表页，搜索框正常显示">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.TextView[3]" />
+                    <assert-key value="com.lufax.android:id/tv_search_hint" location-type="id"  compare-type="equal" compare-value="搜索基金名称/代码"/>
+                </step>
+                <step id="3" src-page-name="JiJinInFinancePage" method="shortTapByXpath" dest-page-name="JiJinSearchPage" snapshoot="true" step-desc="点击基金列表页搜索框，进基金搜索页" expect-result="正常进入搜索页面，软键盘弹起">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[2]/android.support.v4.view.ViewPager[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]" />
+                    <assert-key value="com.lufax.android:id/et_search_box" location-type="id"  compare-type="equal" compare-value="搜索基金名称/代码"/>
+                </step>
+                <step id="4" src-page-name="JiJinSearchPage" method="sendKeysById" dest-page-name="JiJinSearchResultPage" snapshoot="true" step-desc="输入搜索文本" expect-result="正常显示所有全文带有123的搜索结果列表">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_search_box" />
+                    <method-param name="keyStr" type="input-string" value="123\n"/>
+                    <assert-key value="com.lufax.android:id/fund_search_result_item_optional_btn" location-type="id"  compare-type="equal" compare-value="＋自选"/>
+                </step>
+            </case>
+
+            <case id="2" title="查看定期列表" priority="1">
+                <step id="1" src-page-name="JiJinSearchPage" method="shortTapById" dest-page-name="JiJinInFinancePage" snapshoot="true" step-desc="点击返回，返回基金理财页面"  expect-result="正常返回基金理财页面">
+                    <method-param name="elemId" type="element-id" value="com.lufax.android:id/title_bar_left_tv" />
+                    <assert-key value="com.lufax.android:id/tv_search_hint" location-type="id"  compare-type="equal" compare-value="搜索基金名称/代码"/>
+                </step>
+                <step id="2" src-page-name="JiJinInFinancePage" method="shortTapByXpath" dest-page-name="FinanceListPage" snapshoot="true" step-desc="点击理财，进理财大列表页" expect-result="进入投资理财大列表页">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.HorizontalScrollView[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" />
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[2]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="定期"/>
+                </step>
+                <step id="3" src-page-name="FinanceListPage" method="shortTapByXpath" dest-page-name="DingQiList" snapshoot="true" step-desc="点击定期，进定期频道列表页" expect-result="正常进入定期频道列表页">
+                    <method-param name="elemXpath" type="element-xpath" value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[2]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]" />
+                    <assert-key value="//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.support.v4.view.ViewPager[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.ListView[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]" location-type="xpath"  compare-type="equal" compare-value="财富汇、彩虹"/>
+                </step>
+            </case>
+        </test-cases>
+
+        <after-test-cases purpose="测试后清理" preserve-order="true">
+            <case id="1" title="关闭appium driver" priority="2">
+                <step id="1" src-page-name="基金搜索结果页" method="shortTapById" dest-page-name="手机桌面" snapshoot="true" step-desc="关闭appium driver" expect-result="">
+                    <assert-key value="com.lufax.android://tsv5" location-type="id" compare-type="equal" compare-value="桌面" />
+                </step>
+            </case>
+        </after-test-cases>
+    </cases>
+</suite>

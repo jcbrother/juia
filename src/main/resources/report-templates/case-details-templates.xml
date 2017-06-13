@@ -1,0 +1,24 @@
+<div id="$!{CASE_ID}-details" class="case-details">
+    <p id="details-title">用例详情</p>
+    <p id="case-title">标题</p>
+    <p id="detail-title">[$!{CASE_ID}]$!{CASE_TITLE}</p>
+    <p id="step-title">步骤</p>
+    <ul id="step-details">
+        $!{DETAIL_STEP_STR_LIST}
+    </ul>
+    <p id="result-title">结果</p>
+    <ul id="test-results">
+        $!{TEST_RESULT_STEP_STR_LIST}
+    </ul>
+    <p id="snapshoot-title">截图</p>
+    <div id="snapshoot-display">
+    <p id="pic-name">$!{FIRST_PIC_NAME}</p>
+    <img id="left-icon" src="../../report-src/left-icon.png" alt="上一张" onclick="showPreviousSnapshoot(this)"/>
+    <img id="snapshoot-playing" src="$!{FIRST_SNAPSHOOT_PIC}" alt="没有截图或加载失败"/>
+    <img id="right-icon" src="../../report-src/right-icon.png" alt="下一张" onclick="showNextSnapshoot(this)"/>
+    <p id="pic-idx">$!{FIRST_PIC_IDX}/$!{SNAPSHOOT_LIST_LENGTH}</p>
+    </div>
+    <ul id="snapshoot-list">
+        $!{SNAPSHOOT-LIST}
+    </ul>
+</div>
