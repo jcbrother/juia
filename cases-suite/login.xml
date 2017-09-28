@@ -15,7 +15,7 @@
         </before-test-cases>
 
         <test-cases purpose="测试用户登录" preserve-order="true">
-            <case id="1" title="登录mobguang账户" priority="1">
+            <case id="1" title="登录test账户" priority="1">
                 <step id="1" src-page-name="MainPage" method="shortTapById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="点击我的，跳转至用户登录页面"  expect-result="正常进入用户登录页面">
                     <method-param name="elemId" type="element-id" value="com.lufax.android:id/layout_bottombar4" />
                     <assert-key value="com.lufax.android:id/btn_login" location-type="id"  compare-type="equal" compare-value="登录"/>
@@ -23,7 +23,7 @@
                 <step id="2" src-page-name="UserLoginPage" method="sendKeysById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="输入用户名" expect-result="正常输入用户名">
                     <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_loginname" />
                     <method-param name="keyStr" type="input-string" value="chenjie002\n"/>
-                    <assert-key value="com.lufax.android:id/et_loginname" location-type="id"  compare-type="equal" compare-value="mobguang"/>
+                    <assert-key value="com.lufax.android:id/et_loginname" location-type="id"  compare-type="equal" compare-value="test"/>
                 </step>
                 <step id="3" src-page-name="UserLoginPage" method="sendKeysById" dest-page-name="UserLoginPage" snapshoot="true" step-desc="输入密码" expect-result="正常输入登录密码">
                     <method-param name="elemId" type="element-id" value="com.lufax.android:id/et_loginpswd" />
